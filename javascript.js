@@ -1,0 +1,126 @@
+const openModal = document.getElementById("openModal");
+const closeModal = document.getElementById("closeModal");
+const myModal = document.getElementById("myModal");
+
+openModal.addEventListener("click", () => {
+ myModal.classList.remove("hidden");
+
+});
+
+closeModal.addEventListener("click", () => {
+  myModal.classList.add("hidden");
+  
+});
+
+
+function enregistrerInformations(){
+    const description=document.getElementById("desc").value;
+    const montant=document.getElementById("montant").value;
+    const operation=document.getElementById("operation").value;
+    const date=document.getElementById("date").value;
+     
+   createCard(description,montant,operation,date);
+   document.getElementById("desc").value="";
+   document.getElementById("montant").value="";
+   document.getElementById("date").value="";
+ }
+  
+function createCard(description,montant,operation,date){
+     const transaction=document.getElementById("transaction");
+
+    const card=document.createElement("div");
+    if(operation=="Revenu"){
+ card.classList.add('ml-16', 'p-12', 'text-center', 'w-80', 'bg-green-500', 'rounded-lg');
+    }else{
+ card.classList.add('ml-16', 'p-12', 'text-center', 'w-80', 'bg-red-500', 'rounded-lg');
+    }
+   
+
+    const divEnterCard=document.createElement("div");
+      divEnterCard.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
+
+    const h=document.createElement("h3");
+    h.classList.add('text-black-500', 'font-bold');
+    h.textContent="description";
+    divEnterCard.appendChild(h);
+
+    const p=document.createElement("p");
+    p.classList.add('mb-4');
+    p.textContent=`${description}`;
+    divEnterCard.appendChild(p);
+    card.appendChild(divEnterCard);
+
+
+
+
+       const divEnterCard2=document.createElement("div");
+      divEnterCard2.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
+
+    const h2=document.createElement("h3");
+    h2.classList.add('text-black-500', 'font-bold');
+    h2.textContent="Montant";
+    divEnterCard2.appendChild(h2);
+
+    const p2=document.createElement("p");
+    p2.classList.add( 'mb-4');
+    if(operation=="Revenu"){
+p2.textContent=`+${montant}`;
+    }else{
+        p2.textContent=`-${montant}`;
+    }
+    
+    divEnterCard2.appendChild(p2);
+    card.appendChild(divEnterCard2);
+
+
+
+
+       const divEnterCard3=document.createElement("div");
+      divEnterCard3.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
+
+    const h3=document.createElement("h3");
+    h3.classList.add('text-black-500', 'font-bold');
+    h3.textContent="Type";
+    divEnterCard3.appendChild(h3);
+
+    const p3=document.createElement("p");
+    p3.classList.add( 'mb-4');
+    p3.textContent=`${operation}`;
+    divEnterCard3.appendChild(p3);
+    card.appendChild(divEnterCard3);
+
+
+
+
+       const divEnterCard4=document.createElement("div");
+      divEnterCard4.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
+
+    const h4=document.createElement("h3");
+    h4.classList.add('text-black-500', 'font-bold');
+    h4.textContent="Date";
+    divEnterCard4.appendChild(h4);
+
+    const p4=document.createElement("p");
+    p4.classList.add('mb-4');
+    p4.textContent=`${date}`;
+    divEnterCard4.appendChild(p4);
+    card.appendChild(divEnterCard4);
+
+    const divbtn=document.createElement("div");
+    divbtn.classList.add("mt-8");
+    const btnsupprimer=document.createElement("button");
+    btnsupprimer.classList.add('bg-orange-600', 'p-4', 'rounded-lg', 'font-bold','mr-4');
+    btnsupprimer.textContent="supprimer";
+    divbtn.appendChild(btnsupprimer);
+     const btnmodifier=document.createElement("button");
+    btnmodifier.classList.add('bg-green-600', 'p-4', 'rounded-lg', 'font-bold');
+    btnmodifier.textContent="modifier";
+    divbtn.appendChild(btnmodifier);
+    card.appendChild(divbtn);
+
+   transaction.appendChild(card);
+ 
+
+}
+
+
