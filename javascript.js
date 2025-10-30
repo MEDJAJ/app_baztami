@@ -54,6 +54,7 @@ function updateTotale(){
     const revenu=document.getElementById("revenu");
     const depense=document.getElementById("depense");
     const solde=document.getElementById("solde");
+    
     let revenus=0;
     let depenses=0;
     let solde_net=0;
