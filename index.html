@@ -50,10 +50,10 @@
 
 
  
-<div class="grid grid-cols-5 gap-4" id="transaction">
+<div class="grid grid-cols-5 gap-4" id="transaction" >
 
-
-<div class="ml-16 p-12 text-center w-80 bg-red-500 rounded-lg ">
+<!-- 
+<div class="ml-16 px-12 text-center w-80 bg-red-500 rounded-lg ">
   <div class="border-b-2 border-b-gray-400 w-64 my-4">
   <h3 class="text-black-500 font-bold">Description de l'opération :</h3>
   <p class=" font-bold mb-4">cette operation pour revenu</p>
@@ -62,25 +62,25 @@
 
    <div class="border-b-2 border-b-gray-400 w-64 my-4">
     <h3 class="text-black-500 font-bold">Montant :</h3>
-  <p class=" mb-4 ">1000 Dh</p>
+  <p class=" mb-2 ">1000 Dh</p>
    </div>
 
 <div class="border-b-2 border-b-gray-400 w-64 my-4">
     <h3 class="text-black-500 font-bold">Type :</h3>
-  <p class=" mb-4 "> revenu</p>
+  <p class=" mb-2 "> revenu</p>
 </div>
   
 <div class="border-b-2 border-b-gray-400 w-64 my-4">
 <h3 class="text-black-500 ">Date :</h3>
-  <p class=" mb-4 "> 10/28/2025</p>
+  <p class=" mb-2 "> 10/28/2025</p>
 </div>
 
-<div class="mt-8" >
-  <button class="bg-orange-600 p-4 rounded-lg font-bold" onclick="supprimerTransaction()">Supprimer</button>
-  <button  class="bg-green-600 p-4 rounded-lg font-bold" onclick="modifierTransaction()">Modifier</button>
+<div class="mt-6 mb-2" >
+  <button class="bg-orange-600 p-2 rounded-lg font-bold" onclick="supprimerTransaction()">Supprimer</button>
+  <button  class="bg-green-600 p-2 rounded-lg font-bold" onclick="modifierTransaction()">Modifier</button>
 </div>
 
-</div>
+</div> -->
 
 </div>
 
@@ -112,6 +112,29 @@
       </form>
 
       <button id="closeModal" class="absolute top-2 right-3 text-2xl text-gray-500 hover:text-black">&times;</button>
+    </div>
+  </div>
+
+
+
+  <div id="cardmodifier" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+    <input type="hidden" id="ntransactionId">
+
+    <div class="bg-white rounded-xl p-6 w-96 shadow-lg relative p-6">
+      <h2 class="text-xl font-semibold mb-4">Modifier une transaction</h2>
+      
+      <form class="flex flex-col space-y-3">
+        <input type="text" placeholder="Description" class="border p-2 rounded" id="ndesc" required>
+        <input type="number" placeholder="Montant $" class="border p-2 rounded" id="nmontant" required>
+        <select class="border p-2 rounded" id="noperation">
+          <option>Revenu</option>
+          <option>Dépense</option>
+        </select>
+        <input type="date" class="border p-2 rounded" id="ndate" required>
+        <button class="bg-green-500 text-white p-2 rounded" onclick="modifierInformations()" type="button">Enregistrer</button>
+      </form>
+
+      <button id="ncloseModal" class="absolute top-2 right-3 text-2xl text-gray-500 hover:text-black">&times;</button>
     </div>
   </div>
 
