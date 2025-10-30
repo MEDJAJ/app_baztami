@@ -50,7 +50,7 @@
 
 
  
-<div class="grid grid-cols-5 gap-4" id="transaction" >
+<div class="grid md:grid-cols-4 gap-4 grid-cols-1 ml-24 md:ml-0" id="transaction" >
 
 <!-- 
 <div class="ml-16 px-12 text-center w-80 bg-red-500 rounded-lg ">
@@ -108,7 +108,7 @@
           <option>Dépense</option>
         </select>
         <input type="date" class="border p-2 rounded" id="date" required>
-        <button class="bg-green-500 text-white p-2 rounded" onclick="enregistrerInformations()" type="button">Enregistrer</button>
+        <button class="hover:bg-green-500 bg-lime-400 text-white p-2 rounded" onclick="enregistrerInformations()" type="button">Enregistrer</button>
       </form>
 
       <button id="closeModal" class="absolute top-2 right-3 text-2xl text-gray-500 hover:text-black">&times;</button>
@@ -131,7 +131,7 @@
           <option>Dépense</option>
         </select>
         <input type="date" class="border p-2 rounded" id="ndate" required>
-        <button class="bg-green-500 text-white p-2 rounded" onclick="modifierInformations()" type="button">Enregistrer</button>
+        <button class="bg-green-500 hover:bg-lime-400 text-white p-2 rounded" onclick="modifierInformations()" type="button">Enregistrer</button>
       </form>
 
       <button id="ncloseModal" class="absolute top-2 right-3 text-2xl text-gray-500 hover:text-black">&times;</button>

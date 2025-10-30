@@ -1,10 +1,15 @@
+window.addEventListener("load", loadFromLocalStorage);
 const openModal = document.getElementById("openModal");
 const closeModal = document.getElementById("closeModal");
 const myModal = document.getElementById("myModal");
 
+
 let currentId=1;
 
 let transactions=[];
+
+
+
 
 class Transaction{
   constructor(description, montant, operation, date) {
@@ -15,6 +20,22 @@ class Transaction{
     this.date = date;
   }
 }
+
+function saveToLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+function loadFromLocalStorage() {
+  const data = localStorage.getItem("transactions");
+  if (data) {
+    transactions = JSON.parse(data);
+    currentId = transactions.length > 0 ? transactions[transactions.length - 1].id + 1 : 1;
+    transactions.forEach(t => createCard(t));
+    updateTotale();
+  }
+}
+
+
 
 function ajauterTransaction(description,montant,operation,date){
 
@@ -28,10 +49,6 @@ transactions.push(transaction);
    document.getElementById("date").value="";
    myModal.classList.add('hidden');
    updateTotale();
-
- 
-
-    
 
 }
 
@@ -54,10 +71,11 @@ function updateTotale(){
     const revenu=document.getElementById("revenu");
     const depense=document.getElementById("depense");
     const solde=document.getElementById("solde");
-    
+
     let revenus=0;
     let depenses=0;
     let solde_net=0;
+
     for(let i=0;i<transactions.length;i++){
         if(transactions[i].operation=='Revenu'){
             revenus +=transactions[i].montant;
@@ -92,6 +110,7 @@ function enregistrerInformations(){
  
 
 ajauterTransaction(description,montant,operation,date);
+saveToLocalStorage();
 
 //    createCard(description,montant,operation,date);
 //    document.getElementById("desc").value="";
@@ -190,7 +209,8 @@ p2.textContent=`+${transactionn.montant}`;
     btnsupprimer.classList.add('bg-orange-600', 'p-2', 'rounded-lg', 'font-bold','mr-4');
     btnsupprimer.textContent="supprimer";
     btnsupprimer.addEventListener("click", () => {
-    const id = Number(card.dataset.id); 
+     if( confirm("Êtes-vous sûr de vouloir supprimer cette transaction ?")){
+ const id = Number(card.dataset.id); 
     card.remove(); 
     const nouvelleTransactions=[];
     for(let i=0;i<transactions.length;i++){
@@ -200,6 +220,9 @@ p2.textContent=`+${transactionn.montant}`;
     }
     transactions=nouvelleTransactions;
     updateTotale(); 
+    saveToLocalStorage();
+     }
+   
 });
     divbtn.appendChild(btnsupprimer);
      const btnmodifier=document.createElement("button");
@@ -257,12 +280,12 @@ function modifierInformations() {
 
       if (transactions[i].operation === "Revenu") {
         card.querySelector(".pmontant").textContent = `+${transactions[i].montant}`;
-        card.classList.remove("bg-red-500");
-        card.classList.add("bg-green-500");
+        card.classList.remove("bg-red-200");
+        card.classList.add("bg-lime-200");
       } else {
         card.querySelector(".pmontant").textContent = `-${transactions[i].montant}`;
-        card.classList.remove("bg-green-500");
-        card.classList.add("bg-red-500");
+        card.classList.remove("bg-lime-200");
+        card.classList.add("bg-red-200");
       }
 
       card.querySelector(".poperation").textContent = transactions[i].operation;
@@ -272,6 +295,7 @@ function modifierInformations() {
 
   
   updateTotale();
+  saveToLocalStorage();
 
 
   document.getElementById("cardmodifier").classList.add("hidden");
