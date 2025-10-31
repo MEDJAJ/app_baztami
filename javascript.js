@@ -107,17 +107,28 @@ function enregistrerInformations(){
     const montant=document.getElementById("montant").value;
     const operation=document.getElementById("operation").value;
     const date=document.getElementById("date").value;
- 
+    let valid=false;
 
+    const regexdescription=/^[A-Za-z\s0-9\.]+$/;
+    if((description !=="" && regexdescription.test(description)) && montant!=="" && date!==""){
 ajauterTransaction(description,montant,operation,date);
 saveToLocalStorage();
+    }else{
+      alert("toutes les champs obligatoires et aussi valid");
+    }
 
-//    createCard(description,montant,operation,date);
-//    document.getElementById("desc").value="";
-//    document.getElementById("montant").value="";
-//    document.getElementById("date").value="";
-//    myModal.classList.add('hidden');
+
+
+
+
+
+
+
+
+
  }
+
+
   
 function createCard(transactionn){
      const transaction=document.getElementById("transaction");
@@ -127,9 +138,9 @@ function createCard(transactionn){
      card.dataset.id = transactionn.id;
 
     if(transactionn.operation=="Revenu"){
- card.classList.add('ml-16', 'px-12', 'text-center', 'w-80', 'bg-lime-200', 'rounded-lg');
+ card.classList.add('ml-4', 'px-12', 'text-center', 'w-80', 'bg-lime-200', 'rounded-lg');
     }else{
- card.classList.add('ml-16', 'px-12', 'text-center', 'w-80', 'bg-red-200', 'rounded-lg');
+ card.classList.add('ml-4', 'px-12', 'text-center', 'w-80', 'bg-red-200', 'rounded-lg');
     }
    
 
@@ -137,12 +148,12 @@ function createCard(transactionn){
       divEnterCard.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
 
     const h=document.createElement("h3");
-    h.classList.add('text-black-500', 'font-bold');
-    h.textContent="description";
+    h.classList.add('text-black-500', 'font-bold','text-slate-600');
+    h.textContent="description :";
     divEnterCard.appendChild(h);
 
     const p=document.createElement("p");
-    p.classList.add('mb-2','pdesc');
+    p.classList.add('mb-2','pdesc','font-semibold','text-indigo-400');
     p.textContent=`${transactionn.description}`;
     divEnterCard.appendChild(p);
     card.appendChild(divEnterCard);
@@ -154,12 +165,12 @@ function createCard(transactionn){
       divEnterCard2.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
 
     const h2=document.createElement("h3");
-    h2.classList.add('text-black-500', 'font-bold');
+    h2.classList.add('text-black-500', 'font-bold','text-slate-600');
     h2.textContent="Montant";
     divEnterCard2.appendChild(h2);
 
     const p2=document.createElement("p");
-    p2.classList.add( 'mb-2','pmontant');
+    p2.classList.add( 'mb-2','pmontant','text-indigo-400','font-semibold');
     if(transactionn.operation=="Revenu"){
 p2.textContent=`+${transactionn.montant}`;
     }else{
@@ -176,12 +187,12 @@ p2.textContent=`+${transactionn.montant}`;
       divEnterCard3.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
 
     const h3=document.createElement("h3");
-    h3.classList.add('text-black-500', 'font-bold');
+    h3.classList.add('text-black-500', 'font-bold','text-slate-600');
     h3.textContent="Type";
     divEnterCard3.appendChild(h3);
 
     const p3=document.createElement("p");
-    p3.classList.add( 'mb-2','poperation');
+    p3.classList.add( 'mb-2','poperation','text-indigo-400','font-semibold');
     p3.textContent=`${transactionn.operation}`;
     divEnterCard3.appendChild(p3);
     card.appendChild(divEnterCard3);
@@ -193,12 +204,12 @@ p2.textContent=`+${transactionn.montant}`;
       divEnterCard4.classList.add('border-b-2', 'border-b-gray-400', 'w-64', 'my-4');
 
     const h4=document.createElement("h3");
-    h4.classList.add('text-black-500', 'font-bold');
+    h4.classList.add('text-black-500', 'font-bold','text-slate-600');
     h4.textContent="Date";
     divEnterCard4.appendChild(h4);
 
     const p4=document.createElement("p");
-    p4.classList.add('mb-2','pdate');
+    p4.classList.add('mb-2','pdate','text-indigo-400','font-semibold');
     p4.textContent=`${transactionn.date}`;
     divEnterCard4.appendChild(p4);
     card.appendChild(divEnterCard4);
@@ -228,7 +239,7 @@ p2.textContent=`+${transactionn.montant}`;
      const btnmodifier=document.createElement("button");
     btnmodifier.classList.add('bg-green-600', 'p-2', 'rounded-lg', 'font-bold');
     btnmodifier.textContent="modifier";
-    btnmodifier.addEventListener("click",() => {
+    btnmodifier.addEventListener("click",() =>{
         const id = Number(card.dataset.id); 
         const cardmodifier=document.getElementById("cardmodifier");
         
@@ -241,7 +252,7 @@ p2.textContent=`+${transactionn.montant}`;
    document.getElementById("ntransactionId").value = id; 
       }
       }
-
+updateTotale();
       cardmodifier.classList.remove("hidden");
          
     
