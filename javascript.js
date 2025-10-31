@@ -89,7 +89,6 @@ openModal.addEventListener("click", () => {
 
 closeModal.addEventListener("click", () => {
   myModal.classList.add("hidden");
-
 });
 
 function updateTotale() {
