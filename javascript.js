@@ -8,13 +8,19 @@ let currentId=1;
 
 let transactions=[];
 
-
-
+const body=document.getElementById("body");
+const button = document.getElementById("theme-toggle");
+const icon = document.getElementById("icon");
+button.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  icon.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
+  localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light");
+});
 
 
 
 class Transaction{
-  constructor(description, montant, operation, date) {
+  constructor(description, montant, operation, date){
     this.id = currentId++; 
     this.description = description;
     this.montant = parseFloat(montant);
